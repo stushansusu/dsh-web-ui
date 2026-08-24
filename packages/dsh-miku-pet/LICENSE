@@ -1,7 +1,15 @@
 MIT License
 
-Copyright (c) 2026 PC2005-cloud (original dsh-pet base)
-Copyright (c) 2026 stushansusu (Miku pet adaptations for this package)
+Copyright (c) 2026 PC2005-cloud (structural base: the MIT-licensed dsh-pet
+frame-pet paradigm this package follows)
+Copyright (c) 2026 stushansusu (all code and Miku art in this package)
+
+This package is a standalone pet plugin written for the DSH web GUI. The
+code and asset layout follow the structural conventions of
+PC2005-cloud/dsh-pet (MIT); it does not vendor code or assets from this
+repository's @linxin666/dsh-pet package (Apache-2.0). The shared build
+preset and host single-instance guard used in this repository are covered
+by their own provenance in this repository.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

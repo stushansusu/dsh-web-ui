@@ -3,6 +3,10 @@
   "description": "Miku desktop pet for the dsh web GUI: PNG frame animations with a 5s random idle (pity timer), a continuous work loop earning coins, a shop restoring hunger, stat bars, speech bubbles and a two-level hover menu. Coexists with the built-in dsh-pet under the /miku-pet namespace.",
   "version": "0.1.0",
   "type": "module",
+  "packageManager": "pnpm@11.7.0",
+  "engines": {
+    "node": "^22.19.0 || >=24.0.0"
+  },
   "main": "lib/index.js",
   "types": "lib/types/index.d.ts",
   "exports": {
@@ -66,5 +70,9 @@
     "typescript": "~5.7.2",
     "vitest": "^4.1.8"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zhu1090093659/dsh-web-ui.git"
+  }
 }

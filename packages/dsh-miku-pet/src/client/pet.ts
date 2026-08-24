@@ -416,8 +416,10 @@ export function makePetUI(rt: {
     const animRef = useRef(anim);
     animRef.current = anim;
 
-    /** 帧推进:按帧时长定时切换 img.src;一次性动作播完触发 handleEnded。 */
+    /** 帧推进:按帧时长定时切换 img.src;一次性动作播完触发 handleEnded。
+     * gen 守卫:序列切换/卸载后,过期定时器直接丢弃。 */
     const playFrame = (gen: number) => {
+      if (gen !== genRef.current) return; // 过期序列/已卸载
       const list = frameListRef.current;
       if (!list.length) return;
       if (frameIdxRef.current >= list.length) {
@@ -460,6 +462,10 @@ export function makePetUI(rt: {
     }, [anim, once, seq]);
     useEffect(() => () => {
       stopMove();
+      // 卸载:作废帧序列定时器与在途请求(gen 递增让 playFrame 丢弃过期回调)
+      genRef.current += 1;
+      if (frameTimerRef.current !== null) window.clearTimeout(frameTimerRef.current);
+      frameTimerRef.current = null;
       if (menuTimerRef.current !== null) window.clearTimeout(menuTimerRef.current);
       if (bubbleTimerRef.current !== null) window.clearTimeout(bubbleTimerRef.current);
       if (workTimerRef.current !== null) window.clearTimeout(workTimerRef.current);
@@ -483,6 +489,7 @@ export function makePetUI(rt: {
     const handleEnded = () => {
       const { animations } = config;
       if (dragRef.current.active) return;
+      if (workingRef.current) return; // 工作循环中:成功/失败播完不闪回 idle,由 workCycle 计时器直接接下一轮
       if (animations.turn.includes(animRef.current)) {
         const next = facing === 'left' ? 'right' : 'left';
         setFacing(next);
@@ -633,20 +640,6 @@ export function makePetUI(rt: {
           kind = act.id;
           next = act.name;
         }
-        console.log(
-          '[miku-pet] ' +
-            new Date().toTimeString().slice(0, 8) +
-            ' pet=' +
-            cfg.id +
-            ' facing=' +
-            facingRef.current +
-            ' roll=' +
-            roll.toFixed(4) +
-            ' -> [' +
-            kind +
-            '] ' +
-            next,
-        );
         setAnim(next);
         setOnce(true);
         setSeq((s) => s + 1);
@@ -784,6 +777,7 @@ export function makePetUI(rt: {
     const menuNode = menuOpen
       ? h('div', {
           className: 'miku-pet-menu',
+          'data-dsh-part': 'menu',
           'data-miku-lit': '1',
           onPointerEnter: openMenu,
           onPointerLeave: closeMenu,
@@ -853,6 +847,8 @@ export function makePetUI(rt: {
       className: 'miku-pet-root',
       'data-corner': corner,
       'data-facing': facing,
+      // L2 语义属性（契约 semantic-attrs-v1.md）：根容器标插件、部件标裸 part
+      'data-dsh-plugin': 'miku-pet',
       // 高特异性钩子:供覆盖规则压过 GUI 皮肤 patches(html[data-dsh-skin] body[data-ds-dark-theme] [class*=menu] !important)
       'data-miku-lit': '1',
       'data-miku-root': '1',
@@ -866,6 +862,7 @@ export function makePetUI(rt: {
         h('div', {
           ref: stageRef,
           className: 'miku-pet-stage',
+          'data-dsh-part': 'sprite',
           style: stageStyle,
           children: [
             h('img', {
@@ -883,6 +880,7 @@ export function makePetUI(rt: {
         menuOpen
           ? h('div', {
               className: 'miku-pet-stats',
+              'data-dsh-part': 'stats',
               'data-miku-lit': '1',
               children: STAT_DEFS.map((d) => {
                 const v = Math.round(stats[d.key]);
@@ -897,9 +895,9 @@ export function makePetUI(rt: {
             })
           : null,
         // 对话气泡（按动作弹台词；自动隐藏）
-        bubble ? h('div', { className: 'miku-pet-bubble', children: bubble }) : null,
+        bubble ? h('div', { className: 'miku-pet-bubble', 'data-dsh-part': 'bubble', children: bubble }) : null,
         // 互动飘字（点击等操作：头顶弹出 +0.25 心情）
-        floatMsg ? h('div', { key: floatKey, className: 'miku-pet-float', children: floatMsg }) : null,
+        floatMsg ? h('div', { key: floatKey, className: 'miku-pet-float', 'data-dsh-part': 'float', children: floatMsg }) : null,
         // 悬停菜单
         menuNode,
         // 商店独立窗口（网页中央模态；标题居中「miku商店」/ 格子物品 / 右下角钱包余额）
@@ -909,6 +907,7 @@ export function makePetUI(rt: {
               onClick: () => setShopOpen(false),
               children: h('div', {
                 className: 'miku-pet-shop-window',
+                'data-dsh-part': 'shop',
                 'data-miku-lit': '1',
                 onClick: (e: ReactNS.MouseEvent<HTMLDivElement>) => e.stopPropagation(),
                 children: [

@@ -98,6 +98,7 @@ const MANIFEST = [
       'packages/dsh-desktop-launcher/src/mount-once.ts',
       'packages/dsh-skill-explorer/src/mount-once.ts',
       'packages/dsh-doctor/src/mount-once.ts',
+      'packages/dsh-miku-pet/src/mount-once.ts',
       'packages/skins/skin-center/src/mount-once.ts',
       'packages/dsh-market/src/mount-once.ts',
     ],
