@@ -44,6 +44,8 @@ export interface Animations {
   work?: string[];
   success?: string[];
   fail?: string[];
+  /** 睡觉动作池（菜单触发；循环播放；点击/拖拽醒来；不参与随机） */
+  sleep?: string[];
   moves: MovesConfig;
   categories: Category[];
 }

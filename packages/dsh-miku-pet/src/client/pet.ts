@@ -26,30 +26,34 @@ const css = [
   '.miku-pet-video.is-front{opacity:1}',
   '.miku-pet-hit{position:absolute;pointer-events:auto;cursor:default;z-index:1}',
   '.miku-pet-hit.dragging{cursor:grabbing}',
-  // 悬停菜单(宠物下方小卡片;悬停出现,可改名)
-  '.miku-pet-menu{position:absolute;z-index:6;left:50%;transform:translateX(-50%);top:calc(100% + 6px);pointer-events:auto;display:flex;flex-direction:column;gap:4px;min-width:120px;max-width:200px;background:rgba(22,25,34,.94);border:1px solid rgba(255,255,255,.16);border-radius:8px;padding:6px 8px;font-size:12px;line-height:18px;color:#e9ecf4;box-shadow:0 6px 18px rgba(0,0,0,.4)}',
-  '.miku-pet-menu b{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}',
+  // 悬停菜单(宠物下方小卡片;浅色动漫风,与商店一致;悬停出现,可改名)
+  '.miku-pet-menu{position:absolute;z-index:6;left:50%;transform:translateX(-50%);top:calc(100% + 16px);pointer-events:auto;display:flex;flex-direction:column;gap:5px;min-width:130px;max-width:210px;background:linear-gradient(165deg,#ffffff 0%,#fff6fa 50%,#fdeff6 100%);border:1.5px solid rgba(255,150,190,.5);border-radius:14px;padding:6px 8px;font-size:12px;line-height:18px;color:#5a4652;box-shadow:0 8px 22px rgba(150,40,90,.22),0 0 0 3px rgba(255,200,222,.25)}',
+  '.miku-pet-menu b{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#c2407c}',
   '.miku-pet-menu-row{display:flex;gap:6px;align-items:center;flex-wrap:wrap}',
-  '.miku-pet-menu input{margin:0;flex:1;min-width:0;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);border-radius:5px;color:#e9ecf4;font-size:12px;padding:2px 6px;outline:none}',
-  '.miku-pet-menu input:focus{border-color:#4c8dff}',
-  '.miku-pet-menu button{appearance:none;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.1);color:#e9ecf4;border-radius:5px;font-size:12px;padding:2px 8px;cursor:pointer}',
-  '.miku-pet-menu button:hover{background:rgba(255,255,255,.2)}',
-  '.miku-pet-menu button.primary{background:#2f6bff;border-color:#2f6bff}',
-  '.miku-pet-menu button.primary:hover{background:#3d76ff}',
-  '.miku-pet-menu button:disabled{opacity:.55;cursor:default}',
+  // 菜单按钮两列网格(金币/商店/工作/睡觉);回角落与说明单独一行
+  // 注意:类名避开 menu/panel 子串 —— GUI 皮肤有 html[data-dsh-skin] [class*=menu]/[class*=panel]{深色!important} 补丁
+  '.miku-pet-actions-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px}',
+  '.miku-pet-actions-grid button{width:100%;text-align:center}',
+  '.miku-pet-menu input{margin:0;flex:1;min-width:0;background:#ffffff;border:1.5px solid rgba(255,140,180,.55);border-radius:999px;color:#5a4652;font-size:12px;padding:3px 10px;outline:none}',
+  '.miku-pet-menu input:focus{border-color:#ff6ea8}',
+  '.miku-pet-menu button{appearance:none;border:1.5px solid rgba(255,140,180,.5);background:rgba(255,235,244,.92);color:#c2407c;border-radius:999px;font-size:12px;font-weight:700;padding:3px 12px;cursor:pointer;transition:transform .12s ease,box-shadow .12s ease,background .12s ease}',
+  '.miku-pet-menu button:hover{transform:translateY(-1px);background:#ffe3ee}',
+  '.miku-pet-menu button.primary{background:linear-gradient(135deg,#ff7eb3,#ff5f9e);border:none;color:#ffffff;box-shadow:0 4px 10px rgba(255,95,158,.35)}',
+  '.miku-pet-menu button.primary:hover{background:linear-gradient(135deg,#ff8cbc,#ff6ca8)}',
+  '.miku-pet-menu button:disabled{opacity:.55;cursor:default;transform:none}',
   // 对话气泡(点击/随机动作按动作弹出对应台词;贴近头顶上方)
   '.miku-pet-bubble{position:absolute;z-index:5;left:50%;transform:translateX(-50%);bottom:calc(100% + 4px);max-width:180px;background:rgba(255,255,255,.96);border:1.5px solid #17a8c9;border-radius:12px 12px 12px 3px;color:#0b5c6d;font-size:12px;line-height:1.4;padding:5px 9px;pointer-events:none;box-shadow:0 2px 10px rgba(23,168,201,.3);animation:miku-bubble-in .18s ease-out;text-align:center;white-space:normal}',
   '@keyframes miku-bubble-in{from{transform:translateX(-50%) scale(.6);opacity:0}to{transform:translateX(-50%) scale(1);opacity:1}}',
   // 互动飘字(点击等操作:头顶弹出,上飘淡出)
   '.miku-pet-float{position:absolute;z-index:7;left:50%;bottom:calc(100% + 26px);transform:translateX(-50%);color:#ff5f9e;font-size:15px;font-weight:800;letter-spacing:.5px;white-space:nowrap;text-shadow:0 1px 2px rgba(0,0,0,.35),0 0 8px rgba(255,255,255,.35);pointer-events:none;animation:miku-float-up .95s ease-out forwards}',
   '@keyframes miku-float-up{0%{opacity:0;transform:translate(-50%,6px) scale(.9)}20%{opacity:1;transform:translate(-50%,0) scale(1.05)}100%{opacity:0;transform:translate(-50%,-20px) scale(1)}}',
-  // 左侧属性彩条(饥饿/心情/活力 0-100;悬停时与菜单一起显示)
-  '.miku-pet-stats{position:absolute;z-index:4;right:calc(100% + 6px);top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:3px;pointer-events:none;background:rgba(22,25,34,.55);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:5px 6px;min-width:88px}',
-  '.miku-pet-stat{display:flex;align-items:center;gap:4px;font-size:10px;line-height:12px;color:#dfe3ec;white-space:nowrap}',
-  '.miku-pet-stat-label{text-align:left;color:#cdd3e0}',
-  '.miku-pet-stat-track{flex:1;height:5px;min-width:34px;background:rgba(255,255,255,.16);border-radius:3px;overflow:hidden}',
+  // 左侧属性彩条(饥饿/心情/活力/好感度;浅色动漫风;悬停时与菜单一起显示)
+  '.miku-pet-stats{position:absolute;z-index:4;right:calc(100% + 6px);top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:3px;pointer-events:none;background:linear-gradient(160deg,#fff6fa 0%,#fdeff6 100%);border:1px solid rgba(255,150,190,.4);border-radius:10px;padding:5px 6px;min-width:88px;box-shadow:0 4px 12px rgba(150,40,90,.15)}',
+  '.miku-pet-stat{display:flex;align-items:center;gap:4px;font-size:10px;line-height:12px;color:#2a2f38;white-space:nowrap}',
+  '.miku-pet-stat-label{text-align:left;color:#c2407c;font-weight:600}',
+  '.miku-pet-stat-track{flex:1;height:5px;min-width:34px;background:rgba(255,150,190,.22);border-radius:3px;overflow:hidden}',
   '.miku-pet-stat-fill{display:block;height:100%;border-radius:3px;transition:width .25s ease}',
-  '.miku-pet-stat-num{width:22px;text-align:right;color:#8b93a5;font-variant-numeric:tabular-nums}',
+  '.miku-pet-stat-num{width:30px;text-align:right;color:#8b93a5;font-variant-numeric:tabular-nums}',
   // 商店独立窗口(网页中央模态;动漫风格子商店:标题居中/格子物品/右下角钱包)
   // 选择器统一带 .miku-pet-root 前缀:皮肤有 html[data-dsh-skin="miku"] *{border-radius:6px!important}(0,1,1)
   // 与 html[data-dsh-skin="miku"] button{border-radius:8px!important}(0,1,2),前缀后特异性 (0,2,1)+ 稳压
@@ -73,6 +77,18 @@ const css = [
   '.miku-pet-root .miku-pet-shop-coins{font-size:13px;font-weight:800;color:#d4527e;background:linear-gradient(120deg,#fff0f6,#ffe9f1)!important;background-color:linear-gradient(120deg,#fff0f6,#ffe9f1)!important;border:1.5px solid #ffc9dd;border-radius:999px!important;padding:4px 14px;box-shadow:0 2px 8px rgba(255,150,190,.25);letter-spacing:.5px}',
   '.miku-pet-root .miku-pet-shop-foot button{font-size:13px;font-weight:700;padding:6px 18px;border-radius:999px!important;border:1.5px solid rgba(255,140,180,.45);background:rgba(255,235,244,.92)!important;background-color:rgba(255,235,244,.92)!important;color:#c2407c;cursor:pointer;transition:background .12s ease}',
   '.miku-pet-root .miku-pet-shop-foot button:hover{background:#ffe3ee!important;background-color:#ffe3ee!important}',
+  // 彩票中奖弹层(商店页之上的独立提示,不走气泡)
+  '.miku-pet-root .miku-pet-lottery-prize{font-size:30px;font-weight:800;color:#ff5f9e;text-align:center;letter-spacing:1px;text-shadow:0 2px 10px rgba(255,95,158,.35)}',
+  '.miku-pet-root .miku-pet-lottery-sub{font-size:12px;color:#c2407c;text-align:center;margin-top:-6px}',
+  '.miku-pet-root .miku-pet-lottery-actions{display:flex;justify-content:center;margin-top:8px}',
+  // 玩法说明页(动漫风,与商店同质感)
+  '.miku-pet-root .miku-pet-help-body{max-height:min(62vh,440px);overflow-y:auto;padding:2px 4px;display:flex;flex-direction:column;gap:8px;text-align:left;font-size:12px;line-height:19px;color:#5a4652}',
+  '.miku-pet-root .miku-pet-help-block{border:1px solid rgba(255,170,200,.45);border-radius:12px;padding:8px 10px;background:rgba(255,250,252,.65)}',
+  '.miku-pet-root .miku-pet-help-block b{color:#c2407c}',
+  '.miku-pet-root .miku-pet-help-table{width:100%;border-collapse:collapse;font-size:11px;margin-top:4px}',
+  '.miku-pet-root .miku-pet-help-table th,.miku-pet-root .miku-pet-help-table td{border:1px solid rgba(255,170,200,.4);padding:2px 6px;text-align:center}',
+  '.miku-pet-root .miku-pet-help-table th{background:rgba(255,220,236,.55);color:#c2407c}',
+  '.miku-pet-root .miku-pet-help-ev{color:#ff5f9e;font-weight:800;margin-top:6px}',
   '@keyframes miku-shop-in{from{opacity:0;transform:translateY(8px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}',
   // 明亮主题适配:面板白底黑字。
   // 前缀 html body .miku-pet-root[data-miku-lit][data-miku-root] 特异性 (0,4,2)+,
@@ -115,22 +131,92 @@ const MAX_MISS = 2;
 /** 帧/清单缓存破坏:每次页面加载一个时间戳 → 刷新页面必拿最新素材(宿主对 thumb 是 max-age=3600) */
 const FRAME_V = Date.now();
 
-// 左侧属性彩条定义(饥饿/心情/活力,0-100;颜色区分;悬停才显示)
+// 左侧属性彩条定义(饥饿/心情/活力 0-100 + 好感度 0-500;max 决定条宽与数值上限;悬停才显示)
 const STAT_DEFS = [
-  { key: 'hunger', label: '饥饿值', color: '#ff9f43' },
-  { key: 'mood', label: '心情值', color: '#ff6b81' },
-  { key: 'energy', label: '活力值', color: '#2ed573' },
+  { key: 'hunger', label: '饥饿值', color: '#ff9f43', max: 100 },
+  { key: 'mood', label: '心情值', color: '#ff6b81', max: 100 },
+  { key: 'energy', label: '活力值', color: '#2ed573', max: 100 },
+  { key: 'affection', label: '好感度', color: '#ffd93d', max: 500 },
 ] as const;
 type StatKey = (typeof STAT_DEFS)[number]['key'];
 
-// 商店物品(金币 → 恢复饥饿;金额按比例定,可改)
+/** 触摸互动结果(概率/好感度变化/动画/时长/固定气泡) */
+interface TouchOutcome {
+  prob: number;
+  delta: number;
+  anim: string;
+  ms: number;
+  bubble: string;
+}
+
+// 触摸互动部位判定:按点击框(HIT_BOX)纵向分 3 区(用户定义:0-55 头 / 55-75 身 / 75 以下腿)。
+// success = 命中概率 + 好感度变化 + 动作(循环播到 ms 结束回 idle)+ 固定气泡;
+// fail 仅腿部(未命中 success 时触发;0.3+0.7=1 全覆盖)。动画 key 对应 frames 素材目录。
+const CLICK_ZONES: {
+  id: string;
+  label: string;
+  y0: number;
+  y1: number;
+  success: TouchOutcome;
+  fail?: TouchOutcome;
+}[] = [
+  {
+    id: 'head',
+    label: '头部',
+    y0: 0.0,
+    y1: 0.55,
+    success: { prob: 0.05, delta: 5, anim: 'happy', ms: 3000, bubble: '*我好开心！*' },
+  },
+  {
+    id: 'body',
+    label: '身体',
+    y0: 0.55,
+    y1: 0.75,
+    success: { prob: 0.1, delta: 10, anim: 'shy', ms: 3000, bubble: '**色狼**你干嘛！**' },
+  },
+  {
+    id: 'legs',
+    label: '腿部',
+    y0: 0.75,
+    y1: 1.0,
+    success: { prob: 0.1, delta: 30, anim: 'flirty', ms: 3000, bubble: '***是你想要我主动一点吗？***' },
+    fail: { prob: 0.9, delta: -5, anim: 'angry', ms: 3000, bubble: '哼！' },
+  },
+];
+
+// 商店物品:食物(金币→恢复饥饿)+ 游戏币(10 金币兑换 1 个)+ 幸运彩票(50 金币,全属性+10,买即开奖)
 const SHOP_ITEMS = [
   { id: 'food1', img: '/miku-pet/thumb/shop/miku-pet-shop1.webp', price: 5, hunger: 40, label: '香浓可口的超级无敌黄油面包' },
   { id: 'food2', img: '/miku-pet/thumb/shop/miku-pet-shop2.webp', price: 10, hunger: 80, label: '闪闪发亮新鲜出炉的红豆沙包' },
+  { id: 'gamecoin', img: '/miku-pet/thumb/shop/miku-pet-shop4.webp', price: 10, gameCoins: 1, label: '游戏币' },
+  { id: 'lottery', img: '/miku-pet/thumb/shop/miku-pet-shop6.webp', price: 10, lottery: true, label: '幸运彩票' },
 ];
 
-/** 属性值夹取:低于 0 → 0,高于 100 → 100 */
-const clampStat = (v: number) => Math.min(100, Math.max(0, Math.round(v)));
+// 幸运彩票奖池:[奖金, 概率%];合计 100%;按累计概率开奖
+const LOTTERY_TIERS = [
+  { prize: 1_000_000, pct: 0.01 },
+  { prize: 500_000, pct: 0.08 },
+  { prize: 6_666, pct: 0.35 },
+  { prize: 1_000, pct: 1.2 },
+  { prize: 50, pct: 98.36 },
+] as const;
+const drawLottery = (): number => {
+  const roll = Math.random() * 100;
+  let acc = 0;
+  for (const t of LOTTERY_TIERS) {
+    acc += t.pct;
+    if (roll < acc) return t.prize;
+  }
+  return LOTTERY_TIERS[LOTTERY_TIERS.length - 1].prize;
+};
+/** 彩票期望收益(每张,金币):sum(奖金 × 概率%)——玩法说明页展示 */
+const LOTTERY_EV = LOTTERY_TIERS.reduce((s, t) => s + (t.prize * t.pct) / 100, 0);
+
+/** 属性值夹取:低于 0 → 0,高于 max(默认 100) → max */
+const clampStat = (v: number, max = 100) => Math.min(max, Math.max(0, Math.round(v)));
+
+/** 各属性上限速查(好感度 500,其余 100) */
+const STAT_MAX = Object.fromEntries(STAT_DEFS.map((d) => [d.key, d.max])) as Record<StatKey, number>;
 
 /**
  * 制造宠物页面组件（工厂，与 makePetConfigSection 同理：react 由运行时注入）。
@@ -196,16 +282,25 @@ export function makePetUI(rt: {
     }, [customPos, posKey]);
     const [seq, setSeq] = useState(0);
 
-    // ---- 左侧属性彩条(饥饿/心情/活力 0-100,存 localStorage)----
+    // ---- 左侧属性彩条(饥饿/心情/活力 + 好感度,各按 max 夹取,存 localStorage)----
     const STATS_KEY = 'miku-pet:stats';
     const [stats, setStats] = useState<Record<StatKey, number>>(() => {
-      const clamp = (v: unknown) =>
-        typeof v === 'number' && Number.isFinite(v) ? Math.min(100, Math.max(0, v)) : 100;
+      const clamp = (key: StatKey, v: unknown, def: number) => {
+        const max = STAT_DEFS.find((d) => d.key === key)?.max ?? 100;
+        return typeof v === 'number' && Number.isFinite(v) ? Math.min(max, Math.max(0, v)) : def;
+      };
       try {
-        const raw = JSON.parse(window.localStorage.getItem(STATS_KEY) ?? '{"hunger":100,"mood":100,"energy":100}');
-        return { hunger: clamp(raw?.hunger), mood: clamp(raw?.mood), energy: clamp(raw?.energy) };
+        const raw = JSON.parse(
+          window.localStorage.getItem(STATS_KEY) ?? '{"hunger":100,"mood":100,"energy":100,"affection":100}',
+        );
+        return {
+          hunger: clamp('hunger', raw?.hunger, 100),
+          mood: clamp('mood', raw?.mood, 100),
+          energy: clamp('energy', raw?.energy, 100),
+          affection: clamp('affection', raw?.affection, 100),
+        };
       } catch {
-        return { hunger: 100, mood: 100, energy: 100 };
+        return { hunger: 100, mood: 100, energy: 100, affection: 100 };
       }
     });
     useEffect(() => {
@@ -216,23 +311,54 @@ export function makePetUI(rt: {
       }
     }, [stats]);
 
-    // ---- 属性衰减:每 60s 掉点(饥饿平时 -1/工作 -5;心情 -0.5),下限 0 ----
+    // ---- 属性衰减:每 60s 掉点(饥饿平时 -1/工作 -5;心情 -0.5;活力 -0.25),下限 0 ----
     const HUNGER_DECAY_MS = 60_000;
     const HUNGER_DECAY_NORMAL = 1;
     const HUNGER_DECAY_WORKING = 5;
     const MOOD_DECAY_PER_MIN = 0.5;
-    // 点击互动:心情值 +0.25(0-100 夹取)
-    const CLICK_MOOD_BOOST = 0.25;
+    const ENERGY_DECAY_PER_MIN = 0.25;
+    // 点击互动:心情值随机 +0~3(整数,0-100 夹取)
+    const clickMoodBoost = () => Math.floor(Math.random() * 4);
     useEffect(() => {
       const timer = window.setInterval(() => {
         setStats((prev) => {
           const decay = workingRef.current ? HUNGER_DECAY_WORKING : HUNGER_DECAY_NORMAL;
           const hunger = prev.hunger > 0 ? Math.max(0, prev.hunger - decay) : prev.hunger;
           const mood = prev.mood > 0 ? Math.max(0, prev.mood - MOOD_DECAY_PER_MIN) : prev.mood;
-          if (hunger === prev.hunger && mood === prev.mood) return prev;
-          return { ...prev, hunger, mood };
+          const energy = prev.energy > 0 ? Math.max(0, prev.energy - ENERGY_DECAY_PER_MIN) : prev.energy;
+          if (hunger === prev.hunger && mood === prev.mood && energy === prev.energy) return prev;
+          return { ...prev, hunger, mood, energy };
         });
       }, HUNGER_DECAY_MS);
+      return () => window.clearInterval(timer);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    // ---- 被动金币收入:每分钟 +1(无条件,立即持久化)----
+    useEffect(() => {
+      const timer = window.setInterval(() => {
+        const next = coinsRef.current + 1;
+        coinsRef.current = next;
+        setCoins(next);
+        try {
+          window.localStorage.setItem(COINS_KEY, String(next));
+        } catch {
+          /* 忽略 */
+        }
+      }, 60_000);
+      return () => window.clearInterval(timer);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    // ---- 好感度空闲衰减:待机(idle 循环且非工作/睡觉/拖拽)每满 300s -1,下限 0 ----
+    const AFFECTION_IDLE_DECAY_MS = 300_000;
+    useEffect(() => {
+      const timer = window.setInterval(() => {
+        const cur = animRef.current;
+        if (!cur || !config.animations.idle.includes(cur)) return; // 非待机不衰减
+        if (workingRef.current || sleepingRef.current || dragRef.current.active) return;
+        setStats((prev) => (prev.affection > 0 ? { ...prev, affection: prev.affection - 1 } : prev));
+      }, AFFECTION_IDLE_DECAY_MS);
       return () => window.clearInterval(timer);
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -250,6 +376,10 @@ export function makePetUI(rt: {
     const [menuView, setMenuView] = useState<'root' | 'rename' | 'wallet'>('root');
     // 商店为网页中央的独立窗口(模态),不进小菜单二级
     const [shopOpen, setShopOpen] = useState(false);
+    // 玩法说明页(独立动漫风弹层)
+    const [helpOpen, setHelpOpen] = useState(false);
+    // 彩票开奖结果(独立弹层提示,不走气泡);null = 未开奖
+    const [lotteryResult, setLotteryResult] = useState<null | { prize: number; gameCoins: number }>(null);
     const menuOpenRef = useRef(false);
     const [nameDraft, setNameDraft] = useState('');
     const menuTimerRef = useRef<number | null>(null);
@@ -272,6 +402,12 @@ export function makePetUI(rt: {
       setBubble(text);
       if (bubbleTimerRef.current !== null) window.clearTimeout(bubbleTimerRef.current);
       bubbleTimerRef.current = window.setTimeout(() => setBubble(''), 2600);
+    };
+    /** 固定文案气泡(触摸互动用;时长随动作 3s) */
+    const showBubbleText = (text: string, ms = 2600) => {
+      setBubble(text);
+      if (bubbleTimerRef.current !== null) window.clearTimeout(bubbleTimerRef.current);
+      bubbleTimerRef.current = window.setTimeout(() => setBubble(''), ms);
     };
 
     // ---- 互动飘字(点击等操作在宠物头顶弹出,上飘淡出)----
@@ -298,9 +434,32 @@ export function makePetUI(rt: {
       }
     });
     coinsRef.current = coins;
+    // ---- 游戏币钱包(商店兑换品:10 金币 = 1 个;localStorage 持久化)----
+    const GAMECOINS_KEY = 'miku-pet:gamecoins';
+    const gameCoinsRef = useRef(0);
+    const [gameCoins, setGameCoins] = useState(() => {
+      try {
+        const v = Number(window.localStorage.getItem(GAMECOINS_KEY));
+        return Number.isFinite(v) && v > 0 ? Math.floor(v) : 0;
+      } catch {
+        return 0;
+      }
+    });
+    gameCoinsRef.current = gameCoins;
     const [working, setWorking] = useState(false);
     const workingRef = useRef(false);
     const workTimerRef = useRef<number | null>(null);
+    // 睡觉:菜单触发,循环播放睡眠动作,每 30s 恢复 4 活力;点击/拖拽醒来
+    const SLEEP_RESTORE_MS = 30_000;
+    const SLEEP_RESTORE_ENERGY = 4;
+    // 睡觉动作:前 3 帧"入睡"完整播一遍后,仅循环第 4 帧起("睡熟"姿态,直到被拖拽/点击唤醒)
+    const SLEEP_LOOP_FROM = 3;
+    const [sleeping, setSleeping] = useState(false);
+    const sleepingRef = useRef(false);
+    const sleepTimerRef = useRef<number | null>(null);
+    // 触摸互动动画计时器(3s 后回 idle);播放期间点击只计心情,不触发回退/重复触摸
+    const touchTimerRef = useRef<number | null>(null);
+    const touchingRef = useRef(false);
     const workPlay = (next: string, once: boolean) => {
       setAnim(next);
       setOnce(once);
@@ -333,6 +492,7 @@ export function makePetUI(rt: {
     };
     const doWork = () => {
       if (workingRef.current || dragRef.current.active) return; // 已在工作/拖拽中才挡
+      if (sleepingRef.current) stopSleep(); // 睡觉中点工作 → 先醒来再开工
       workingRef.current = true;
       setWorking(true);
       closeMenuNow();
@@ -346,8 +506,69 @@ export function makePetUI(rt: {
       if (workTimerRef.current !== null) window.clearTimeout(workTimerRef.current);
       backToIdle();
     };
-    // 商店购买:金币不足拒绝;成功扣金币并恢复饥饿(0-100 夹取)
-    const buyItem = (item: { price: number; hunger: number }) => {
+    // 睡觉:循环播睡眠动作,每 30s 活力 +4(0-100 夹取);菜单再次点「睡觉」不可用,靠点击/拖拽醒来
+    const doSleep = () => {
+      if (sleepingRef.current || dragRef.current.active) return;
+      if (workingRef.current) stopWork(); // 工作中点睡觉 → 先收工再睡
+      sleepingRef.current = true;
+      setSleeping(true);
+      closeMenuNow();
+      setAnim(config.animations.sleep?.[0] ?? 'sleep');
+      setOnce(false);
+      setSeq((s) => s + 1);
+      showBubble(config.animations.sleep?.[0] ?? 'sleep');
+      if (sleepTimerRef.current !== null) window.clearInterval(sleepTimerRef.current);
+      sleepTimerRef.current = window.setInterval(() => {
+        if (!sleepingRef.current) return;
+        setStats((prev) => ({ ...prev, energy: Math.min(100, prev.energy + SLEEP_RESTORE_ENERGY) }));
+        showFloat('活力 +4'); // 每 30s 恢复反馈
+      }, SLEEP_RESTORE_MS);
+    };
+    const stopSleep = () => {
+      // 醒来:停止恢复计时,回待机(与工作/拖拽互斥由调用处保证)
+      if (!sleepingRef.current) return;
+      sleepingRef.current = false;
+      setSleeping(false);
+      if (sleepTimerRef.current !== null) {
+        window.clearInterval(sleepTimerRef.current);
+        sleepTimerRef.current = null;
+      }
+      backToIdle();
+    };
+    // 商店购买:彩票付游戏币(见 lottery 分支);其余付金币;成功 → 食物恢复饥饿 / 游戏币 +1(均持久化)
+    const buyItem = (item: { price: number; hunger?: number; gameCoins?: number; lottery?: boolean }) => {
+      if (item.lottery) {
+        // 幸运彩票:10 游戏币/张;全属性 +10;立即开奖,奖金入金币;中奖用独立弹层提示(不走气泡)
+        if (gameCoinsRef.current < item.price) {
+          showBubble('游戏币不足…');
+          return;
+        }
+        const gc = gameCoinsRef.current - item.price;
+        gameCoinsRef.current = gc;
+        setGameCoins(gc);
+        try {
+          window.localStorage.setItem(GAMECOINS_KEY, String(gc));
+        } catch {
+          /* 忽略 */
+        }
+        setStats((s) => ({
+          hunger: clampStat(s.hunger + 10),
+          mood: clampStat(s.mood + 10),
+          energy: clampStat(s.energy + 10),
+          affection: clampStat(s.affection + 10, 500),
+        }));
+        const prize = drawLottery();
+        const total = coinsRef.current + prize;
+        coinsRef.current = total;
+        setCoins(total);
+        try {
+          window.localStorage.setItem(COINS_KEY, String(total));
+        } catch {
+          /* 忽略 */
+        }
+        setLotteryResult({ prize, gameCoins: gc });
+        return;
+      }
       if (coinsRef.current < item.price) {
         showBubble('金币不足…');
         return;
@@ -360,8 +581,20 @@ export function makePetUI(rt: {
       } catch {
         /* 忽略 */
       }
-      setStats((s) => ({ ...s, hunger: clampStat(s.hunger + item.hunger) }));
-      showBubble(item.hunger >= 80 ? '大份下肚,精神满满~' : '吃饱饱啦~');
+      if (item.hunger) {
+        setStats((s) => ({ ...s, hunger: clampStat(s.hunger + (item.hunger as number)) }));
+        showBubble(item.hunger >= 80 ? '大份下肚,精神满满~' : '吃饱饱啦~');
+      } else if (item.gameCoins) {
+        const gc = gameCoinsRef.current + item.gameCoins;
+        gameCoinsRef.current = gc;
+        setGameCoins(gc);
+        try {
+          window.localStorage.setItem(GAMECOINS_KEY, String(gc));
+        } catch {
+          /* 忽略 */
+        }
+        showBubble('兑换游戏币 +' + item.gameCoins + '~');
+      }
     };
     const openMenu = () => {
       if (dragRef.current.active || justDraggedRef.current) return;
@@ -407,6 +640,11 @@ export function makePetUI(rt: {
     const frameListRef = useRef<{ name: string; ms: number }[]>([]);
     const frameIdxRef = useRef(0);
     const frameTimerRef = useRef<number | null>(null);
+    // 播放心跳:每次换帧记录时间;看门狗据此判断帧链是否停滞(>1.2s 未换帧 = 链断)并自愈回待机
+    const lastFrameAtRef = useRef(Date.now());
+    const stallHandledAtRef = useRef(0);
+    // 循环起点:0 = 从头循环;睡觉 = SLEEP_LOOP_FROM(入睡帧播过一遍后只循环睡熟帧)
+    const loopFromRef = useRef(0);
     const onceRef = useRef(true);
     const curActionRef = useRef('');
     const genRef = useRef(0);
@@ -416,10 +654,9 @@ export function makePetUI(rt: {
     const animRef = useRef(anim);
     animRef.current = anim;
 
-    /** 帧推进:按帧时长定时切换 img.src;一次性动作播完触发 handleEnded。
-     * gen 守卫:序列切换/卸载后,过期定时器直接丢弃。 */
+    /** 帧推进:按帧时长定时切换 img.src;一次性动作播完触发 handleEnded;
+     *  循环动作到末尾后从 loopFromRef 所指帧重新开始(默认第 1 帧;睡觉只循环睡熟帧)。 */
     const playFrame = (gen: number) => {
-      if (gen !== genRef.current) return; // 过期序列/已卸载
       const list = frameListRef.current;
       if (!list.length) return;
       if (frameIdxRef.current >= list.length) {
@@ -427,10 +664,11 @@ export function makePetUI(rt: {
           handleEnded();
           return;
         }
-        frameIdxRef.current = 0;
+        frameIdxRef.current = loopFromRef.current;
       }
       const f = list[frameIdxRef.current];
       frameIdxRef.current += 1;
+      lastFrameAtRef.current = Date.now();
       const img = imgRef.current;
       if (img) img.src = '/miku-pet/thumb/' + encodeURIComponent(curActionRef.current) + '/' + encodeURIComponent(f.name) + '?v=' + FRAME_V;
       if (frameTimerRef.current !== null) window.clearTimeout(frameTimerRef.current);
@@ -442,17 +680,39 @@ export function makePetUI(rt: {
       const gen = ++genRef.current;
       curActionRef.current = next;
       onceRef.current = nextOnce;
+      // 睡觉:入睡帧播过一遍后只循环睡熟帧(其余动作从头循环)
+      loopFromRef.current =
+        !nextOnce && next === (config.animations.sleep?.[0] ?? 'sleep') ? SLEEP_LOOP_FROM : 0;
       if (frameTimerRef.current !== null) window.clearTimeout(frameTimerRef.current);
       frameTimerRef.current = null;
       void fetch('/miku-pet/frames/' + encodeURIComponent(next) + '?v=' + FRAME_V)
         .then((r) => (r.ok ? r.json() : { frames: [] }))
         .then((data) => {
           if (gen !== genRef.current) return; // 过期请求丢弃
-          frameListRef.current = (data.frames || []) as { name: string; ms: number }[];
+          const list = (data.frames || []) as { name: string; ms: number }[];
+          frameListRef.current = list;
           frameIdxRef.current = 0;
+          if (!list.length) {
+            // 帧清单为空(网络抖动/动作无素材)→ 不能静默停播(会"卡住"):回待机循环
+            console.warn('[miku-pet] 无帧清单,回待机:', next);
+            if (config.animations.idle.length) {
+              setAnim(pick(config.animations.idle, next));
+              setOnce(false);
+              setSeq((s) => s + 1);
+            }
+            return;
+          }
           playFrame(gen);
         })
-        .catch(() => {});
+        .catch(() => {
+          if (gen !== genRef.current) return;
+          console.warn('[miku-pet] 帧清单加载失败,回待机:', next);
+          if (config.animations.idle.length) {
+            setAnim(pick(config.animations.idle, next));
+            setOnce(false);
+            setSeq((s) => s + 1);
+          }
+        });
     };
 
     // ---- 状态驱动播放 ----
@@ -460,15 +720,26 @@ export function makePetUI(rt: {
       switchTo(anim, once);
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [anim, once, seq]);
+    // 帧链看门狗:正常播放每帧 ≤ ~200ms 就会换帧;超过 1.2s 未换帧视为帧链中断(卡住)→ 强制回待机自愈
+    useEffect(() => {
+      const wd = window.setInterval(() => {
+        if (Date.now() - lastFrameAtRef.current > 1200) {
+          if (Date.now() - stallHandledAtRef.current < 3000) return; // 3s 内已自愈过:防止帧路由持续失败时的热循环
+          stallHandledAtRef.current = Date.now();
+          console.warn('[miku-pet] 帧链停滞(>1.2s 未换帧),自动回待机');
+          backToIdle();
+        }
+      }, 500);
+      return () => window.clearInterval(wd);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
     useEffect(() => () => {
       stopMove();
-      // 卸载:作废帧序列定时器与在途请求(gen 递增让 playFrame 丢弃过期回调)
-      genRef.current += 1;
-      if (frameTimerRef.current !== null) window.clearTimeout(frameTimerRef.current);
-      frameTimerRef.current = null;
       if (menuTimerRef.current !== null) window.clearTimeout(menuTimerRef.current);
       if (bubbleTimerRef.current !== null) window.clearTimeout(bubbleTimerRef.current);
       if (workTimerRef.current !== null) window.clearTimeout(workTimerRef.current);
+      if (sleepTimerRef.current !== null) window.clearInterval(sleepTimerRef.current);
+      if (touchTimerRef.current !== null) window.clearTimeout(touchTimerRef.current);
     }, []);
     useEffect(() => {
       const onResize = () => setCustomPos((prev) => (prev ? { ...prev } : prev));
@@ -489,7 +760,6 @@ export function makePetUI(rt: {
     const handleEnded = () => {
       const { animations } = config;
       if (dragRef.current.active) return;
-      if (workingRef.current) return; // 工作循环中:成功/失败播完不闪回 idle,由 workCycle 计时器直接接下一轮
       if (animations.turn.includes(animRef.current)) {
         const next = facing === 'left' ? 'right' : 'left';
         setFacing(next);
@@ -640,6 +910,20 @@ export function makePetUI(rt: {
           kind = act.id;
           next = act.name;
         }
+        console.log(
+          '[miku-pet] ' +
+            new Date().toTimeString().slice(0, 8) +
+            ' pet=' +
+            cfg.id +
+            ' facing=' +
+            facingRef.current +
+            ' roll=' +
+            roll.toFixed(4) +
+            ' -> [' +
+            kind +
+            '] ' +
+            next,
+        );
         setAnim(next);
         setOnce(true);
         setSeq((s) => s + 1);
@@ -652,6 +936,9 @@ export function makePetUI(rt: {
     // ---- 点击 vs 拖拽 ----
     const handlePointerDown = (e: ReactNS.PointerEvent<HTMLDivElement>) => {
       if (workingRef.current) stopWork(); // 点击/拖拽宠物 = 打断工作循环(之后照常处理)
+      if (sleepingRef.current) stopSleep(); // 点击/拖拽宠物 = 唤醒(之后照常处理)
+      // 注意:这里【不】清触摸计时器——纯点击不打断触摸动画(由 handleClick 的 touching 守卫挡重复触发);
+      // 只有真正拖拽(dragging 成立)才在 handlePointerMove 里打断。
       e.currentTarget.classList.add('dragging');
       stopMove();
       e.currentTarget.setPointerCapture(e.pointerId);
@@ -674,6 +961,12 @@ export function makePetUI(rt: {
         if (Math.hypot(dx, dy) < DRAG_THRESHOLD) return;
         d.dragging = true;
         setDragging(true);
+        // 真正开始拖拽 → 中断触摸动画(清 3s 回待机计时,防止中途回 idle 打断拖拽)
+        if (touchTimerRef.current !== null) {
+          window.clearTimeout(touchTimerRef.current);
+          touchTimerRef.current = null;
+        }
+        touchingRef.current = false;
         // 拖拽姿势循环播放(once=false 持续循环,与桌面版 playAction('Drag', false) 一致)
         setOnce(false);
         if (config.animations.drag.length) setAnim(pick(config.animations.drag));
@@ -721,20 +1014,60 @@ export function makePetUI(rt: {
         }
       }
     };
-    const handleClick = () => {
+    const handleClick = (e: ReactNS.MouseEvent<HTMLDivElement>) => {
       const d = dragRef.current;
       if (d.active || d.dragging || justDraggedRef.current) return;
-      // 每次点击:心情值 +0.25(0-100 夹取);动作播放中的点击同样计心情,仅动画/气泡不重复触发
-      setStats((prev) => ({ ...prev, mood: Math.min(100, prev.mood + CLICK_MOOD_BOOST) }));
-      showFloat('心情 +0.25'); // 互动飘字反馈
+      // 每次点击:心情值随机 +0~3(0-100 夹取);动作播放中的点击同样计心情,仅动画/气泡不重复触发
+      const boost = clickMoodBoost();
+      setStats((prev) => ({ ...prev, mood: Math.min(100, prev.mood + boost) }));
+      if (boost > 0) showFloat('心情 +' + boost); // 互动飘字反馈(0 时不弹)
       if (once && !config.animations.idle.includes(animRef.current)) return;
+      if (touchingRef.current) return; // 触摸动画播放中:仅计心情,不回退/重复触发(防动画交错卡住)
       stopMove();
       setOnce(true);
+      // 部位判定:按点击框内的纵向位置识别头/身/腿 → 触摸互动(成功/失败随机分支)
+      const rect = e.currentTarget.getBoundingClientRect();
+      const relY = rect.height > 0 ? (e.clientY - rect.top) / rect.height : -1;
+      const zone = CLICK_ZONES.find((z) => relY >= z.y0 && relY < z.y1);
+      console.log(
+        '[miku-pet] ' + new Date().toTimeString().slice(0, 8) + ' pet=' + cfg.id + ' click zone=' + (zone?.id ?? 'none') + ' relY=' + relY.toFixed(3),
+      );
+      if (zone) {
+        const roll = Math.random();
+        if (roll < zone.success.prob) {
+          applyTouch(zone.success);
+          return;
+        }
+        if (zone.fail) {
+          applyTouch(zone.fail);
+          return;
+        }
+        // 未触发(头部 95% / 身体 90%)→ 回退普通点击回应(眨眼/吃饭),不抽挠头
+        // (挠头与待机随机池共用,触摸回退用它易与随机演出冲突卡在挠头表情;exclude 当前动画防同动画重入)
+      }
       if (config.animations.clicks.length) {
-        const n = pick(config.animations.clicks);
+        const missPool = config.animations.clicks.filter((a) => a !== 'scratch' && a !== animRef.current);
+        const n = missPool.length ? pick(missPool) : pick(config.animations.clicks);
         setAnim(n);
+        setSeq((s) => s + 1); // 与 applyTouch 同一状态推进,避免同值动画 bailout 后无 seq 变化
         showBubble(n); // 点击 → 按回应动作弹对应气泡
       }
+    };
+    /** 触摸互动:好感度变化 + 专属动画循环播 ms 毫秒(结束后回 idle)+ 固定气泡 + 飘字 */
+    const applyTouch = (o: TouchOutcome) => {
+      setStats((prev) => ({ ...prev, affection: clampStat(prev.affection + o.delta, STAT_MAX.affection) }));
+      showFloat((o.delta >= 0 ? '好感度 +' : '好感度 ') + o.delta);
+      if (touchTimerRef.current !== null) window.clearTimeout(touchTimerRef.current);
+      touchingRef.current = true;
+      setAnim(o.anim);
+      setOnce(false); // 循环播放,直到定时结束回 idle
+      setSeq((s) => s + 1);
+      showBubbleText(o.bubble, o.ms);
+      touchTimerRef.current = window.setTimeout(() => {
+        touchTimerRef.current = null;
+        touchingRef.current = false;
+        backToIdle();
+      }, o.ms);
     };
 
     // ---- 渲染 ----
@@ -777,7 +1110,6 @@ export function makePetUI(rt: {
     const menuNode = menuOpen
       ? h('div', {
           className: 'miku-pet-menu',
-          'data-dsh-part': 'menu',
           'data-miku-lit': '1',
           onPointerEnter: openMenu,
           onPointerLeave: closeMenu,
@@ -811,12 +1143,18 @@ export function makePetUI(rt: {
                     ] }),
                   ]
                 : [
-                    h('div', { className: 'miku-pet-menu-row', children: [h('b', { children: petName || '未命名' })] }),
                     h('div', { className: 'miku-pet-menu-row', children: [
-                      h('button', { onClick: (e: ReactNS.MouseEvent<HTMLButtonElement>) => { e.stopPropagation(); startRename(); }, children: '改名' }),
+                      h('b', { children: petName || '未命名' }),
+                      h('button', {
+                        className: 'primary',
+                        onClick: (e: ReactNS.MouseEvent<HTMLButtonElement>) => { e.stopPropagation(); startRename(); },
+                        children: '改名',
+                      }),
+                    ] }),
+                    h('div', { className: 'miku-pet-actions-grid', children: [
                       h('button', {
                         onClick: (e: ReactNS.MouseEvent<HTMLButtonElement>) => { e.stopPropagation(); setMenuView('wallet'); },
-                        children: '钱包',
+                        children: '金币钱包',
                       }),
                       h('button', {
                         onClick: (e: ReactNS.MouseEvent<HTMLButtonElement>) => {
@@ -831,6 +1169,21 @@ export function makePetUI(rt: {
                         disabled: working,
                         onClick: (e: ReactNS.MouseEvent<HTMLButtonElement>) => { e.stopPropagation(); doWork(); },
                         children: working ? '工作中…' : '工作',
+                      }),
+                      h('button', {
+                        disabled: sleeping,
+                        onClick: (e: ReactNS.MouseEvent<HTMLButtonElement>) => { e.stopPropagation(); doSleep(); },
+                        children: sleeping ? '睡觉中…' : '睡觉',
+                      }),
+                    ] }),
+                    h('div', { className: 'miku-pet-menu-row', children: [
+                      h('button', {
+                        onClick: (e: ReactNS.MouseEvent<HTMLButtonElement>) => {
+                          e.stopPropagation();
+                          closeMenuNow();
+                          setHelpOpen(true); // 玩法说明 = 独立动漫风弹层
+                        },
+                        children: '玩法说明',
                       }),
                       customPos
                         ? h('button', {
@@ -847,8 +1200,6 @@ export function makePetUI(rt: {
       className: 'miku-pet-root',
       'data-corner': corner,
       'data-facing': facing,
-      // L2 语义属性（契约 semantic-attrs-v1.md）：根容器标插件、部件标裸 part
-      'data-dsh-plugin': 'miku-pet',
       // 高特异性钩子:供覆盖规则压过 GUI 皮肤 patches(html[data-dsh-skin] body[data-ds-dark-theme] [class*=menu] !important)
       'data-miku-lit': '1',
       'data-miku-root': '1',
@@ -862,7 +1213,6 @@ export function makePetUI(rt: {
         h('div', {
           ref: stageRef,
           className: 'miku-pet-stage',
-          'data-dsh-part': 'sprite',
           style: stageStyle,
           children: [
             h('img', {
@@ -880,14 +1230,14 @@ export function makePetUI(rt: {
         menuOpen
           ? h('div', {
               className: 'miku-pet-stats',
-              'data-dsh-part': 'stats',
               'data-miku-lit': '1',
               children: STAT_DEFS.map((d) => {
                 const v = Math.round(stats[d.key]);
+                const pct = Math.min(100, Math.max(0, (v / d.max) * 100));
                 return h('div', { className: 'miku-pet-stat', children: [
                   h('span', { className: 'miku-pet-stat-label', children: d.label }),
                   h('span', { className: 'miku-pet-stat-track', children: [
-                    h('span', { className: 'miku-pet-stat-fill', style: { width: v + '%', background: d.color } }),
+                    h('span', { className: 'miku-pet-stat-fill', style: { width: pct + '%', background: d.color } }),
                   ] }),
                   h('span', { className: 'miku-pet-stat-num', children: String(v) }),
                 ] });
@@ -895,9 +1245,9 @@ export function makePetUI(rt: {
             })
           : null,
         // 对话气泡（按动作弹台词；自动隐藏）
-        bubble ? h('div', { className: 'miku-pet-bubble', 'data-dsh-part': 'bubble', children: bubble }) : null,
+        bubble ? h('div', { className: 'miku-pet-bubble', children: bubble }) : null,
         // 互动飘字（点击等操作：头顶弹出 +0.25 心情）
-        floatMsg ? h('div', { key: floatKey, className: 'miku-pet-float', 'data-dsh-part': 'float', children: floatMsg }) : null,
+        floatMsg ? h('div', { key: floatKey, className: 'miku-pet-float', children: floatMsg }) : null,
         // 悬停菜单
         menuNode,
         // 商店独立窗口（网页中央模态；标题居中「miku商店」/ 格子物品 / 右下角钱包余额）
@@ -907,25 +1257,27 @@ export function makePetUI(rt: {
               onClick: () => setShopOpen(false),
               children: h('div', {
                 className: 'miku-pet-shop-window',
-                'data-dsh-part': 'shop',
                 'data-miku-lit': '1',
                 onClick: (e: ReactNS.MouseEvent<HTMLDivElement>) => e.stopPropagation(),
                 children: [
                   h('div', { className: 'miku-pet-shop-head', children: [
-                    h('span', { className: 'miku-pet-shop-head-deco', children: '✦' }),
+                    h('span', { className: 'miku-pet-shop-head-deco', children: '*' }),
                     h('b', { className: 'miku-pet-shop-title', children: 'miku商店' }),
-                    h('span', { className: 'miku-pet-shop-head-deco', children: '✦' }),
+                    h('span', { className: 'miku-pet-shop-head-deco', children: '*' }),
                   ] }),
                   h('button', {
                     className: 'miku-pet-shop-close',
                     onClick: (e: ReactNS.MouseEvent<HTMLButtonElement>) => { e.stopPropagation(); setShopOpen(false); },
-                    children: '✕',
+                    children: '*',
                   }),
                   h('div', { className: 'miku-pet-shop-grid', children: SHOP_ITEMS.map((it) =>
                     h('div', { className: 'miku-pet-shop-cell', children: [
                       h('img', { className: 'miku-pet-shop-img', src: it.img, alt: it.id }),
                       h('span', { className: 'miku-pet-shop-cell-name', children: it.label }),
-                      h('span', { className: 'miku-pet-shop-cell-meta', children: it.price + ' 金币 · 恢复 ' + it.hunger + ' 饥饿' }),
+                      h('span', {
+                        className: 'miku-pet-shop-cell-meta',
+                        children: it.price + (it.lottery ? ' 游戏币 · ' : ' 金币 · ') + (it.hunger ? '恢复 ' + it.hunger + ' 饥饿' : it.gameCoins ? '兑换 ' + it.gameCoins + ' 个' : '全属性+10,买即开奖(最高100万)'),
+                      }),
                       h('button', {
                         onClick: (e: ReactNS.MouseEvent<HTMLButtonElement>) => { e.stopPropagation(); buyItem(it); },
                         children: '购买',
@@ -937,7 +1289,119 @@ export function makePetUI(rt: {
                       onClick: (e: ReactNS.MouseEvent<HTMLButtonElement>) => { e.stopPropagation(); setShopOpen(false); },
                       children: '关闭',
                     }),
-                    h('span', { className: 'miku-pet-shop-coins', children: '钱包 ' + coins + ' 金币' }),
+                    h('span', { className: 'miku-pet-shop-coins', children: '钱包 ' + coins + ' 金币 · 游戏币 ' + gameCoins }),
+                  ] }),
+                ],
+              }),
+            })
+          : null,
+        // 彩票中奖弹层:独立页面提示(在商店之上,不走气泡);点遮罩/确认关闭
+        lotteryResult
+          ? h('div', {
+              className: 'miku-pet-shop-overlay',
+              onClick: () => setLotteryResult(null),
+              children: h('div', {
+                className: 'miku-pet-shop-window',
+                'data-miku-lit': '1',
+                onClick: (e: ReactNS.MouseEvent<HTMLDivElement>) => e.stopPropagation(),
+                children: [
+                  h('div', { className: 'miku-pet-shop-head', children: [
+                    h('span', { className: 'miku-pet-shop-head-deco', children: '*' }),
+                    h('b', { className: 'miku-pet-shop-title', children: '幸运开奖' }),
+                    h('span', { className: 'miku-pet-shop-head-deco', children: '*' }),
+                  ] }),
+                  h('div', {
+                    className: 'miku-pet-lottery-prize',
+                    children: (lotteryResult.prize >= 1_000_000 ? '* 头奖 * ' : '') + lotteryResult.prize.toLocaleString() + ' 金币',
+                  }),
+                  h('div', { className: 'miku-pet-lottery-sub', children: '游戏币余额 ' + lotteryResult.gameCoins }),
+                  h('div', { className: 'miku-pet-lottery-actions', children: [
+                    h('button', {
+                      className: 'primary',
+                      onClick: (e: ReactNS.MouseEvent<HTMLButtonElement>) => { e.stopPropagation(); setLotteryResult(null); },
+                      children: '确认',
+                    }),
+                  ] }),
+                ],
+              }),
+            })
+          : null,
+        // 玩法说明页(独立动漫风弹层,列出彩票概率与期望值)
+        helpOpen
+          ? h('div', {
+              className: 'miku-pet-shop-overlay',
+              onClick: () => setHelpOpen(false),
+              children: h('div', {
+                className: 'miku-pet-shop-window',
+                'data-miku-lit': '1',
+                onClick: (e: ReactNS.MouseEvent<HTMLDivElement>) => e.stopPropagation(),
+                children: [
+                  h('div', { className: 'miku-pet-shop-head', children: [
+                    h('span', { className: 'miku-pet-shop-head-deco', children: '*' }),
+                    h('b', { className: 'miku-pet-shop-title', children: '玩法说明' }),
+                    h('span', { className: 'miku-pet-shop-head-deco', children: '*' }),
+                  ] }),
+                  h('button', {
+                    className: 'miku-pet-shop-close',
+                    onClick: (e: ReactNS.MouseEvent<HTMLButtonElement>) => { e.stopPropagation(); setHelpOpen(false); },
+                    children: '×',
+                  }),
+                  h('div', { className: 'miku-pet-help-body', children: [
+                    // 金币收入
+                    h('div', { className: 'miku-pet-help-block', children: [
+                      h('b', { children: '金币收入' }),
+                      h('div', { children: '· 被动收入:每分钟自动 +1 金币(待机/工作/睡觉均生效),下线后不累计。' }),
+                      h('div', { children: '· 工作:每 10s 判定一轮,50% 成功 +3 金币、50% 失败 -1 金币,判定后自动继续下一轮,点击/拖拽可打断。' }),
+                      h('div', { children: '· 钱包余额下限 0,存 localStorage/存档文件,刷新不丢失。' }),
+                    ] }),
+                    // 属性与衰减
+                    h('div', { className: 'miku-pet-help-block', children: [
+                      h('b', { children: '属性与衰减(每 60s 结算)' }),
+                      h('div', { children: '· 饥饿:-1(工作中 -5),下限 0,商店食物可恢复。' }),
+                      h('div', { children: '· 心情:-0.5,下限 0;点击宠物随机 +0~3。' }),
+                      h('div', { children: '· 活力:-0.25,下限 0;睡觉每 30s +4(上限 100)。' }),
+                      h('div', { children: '· 好感度:待机每满 300s -1,下限 0、上限 500。' }),
+                    ] }),
+                    // 触摸互动
+                    h('div', { className: 'miku-pet-help-block', children: [
+                      h('b', { children: '触摸互动(好感度)' }),
+                      h('div', { children: '· 头部(宠物上半):5% 概率 +5 好感,触发开心动画 3 秒。' }),
+                      h('div', { children: '· 身体(中部):10% 概率 +10 好感,触发害羞动画 3 秒。' }),
+                      h('div', { children: '· 腿部(下半):10% 概率 +30 好感并触发色色动画;90% 概率 -5 好感并触发生气动画。' }),
+                    ] }),
+                    // 睡觉与拖拽
+                    h('div', { className: 'miku-pet-help-block', children: [
+                      h('b', { children: '睡觉与拖拽' }),
+                      h('div', { children: '· 睡觉:菜单触发,每 30s 活力 +4;点击/拖拽唤醒;与工作互斥。' }),
+                      h('div', { children: '· 拖拽:拖走宠物松手播放站起动画并回待机,位置会记住,菜单可「回角落」。' }),
+                    ] }),
+                    // 随机待机演出
+                    h('div', { className: 'miku-pet-help-block', children: [
+                      h('b', { children: '随机待机演出' }),
+                      h('div', { children: '· 待机时每 5s 掷骰,60% 概率表演随机动作(眨眼/挠头/吃饭)。' }),
+                      h('div', { children: '· 连续 2 次没抽中时,下一次 100% 必演(保底)。' }),
+                    ] }),
+                    // 商店
+                    h('div', { className: 'miku-pet-help-block', children: [
+                      h('b', { children: '商店(均需金币/游戏币充足)' }),
+                      h('div', { children: '· 黄油面包:5 金币兑换,饥饿 +40。' }),
+                      h('div', { children: '· 红豆沙包:10 金币兑换,饥饿 +80。' }),
+                      h('div', { children: '· 游戏币:10 金币兑换 1 个,可无限攒。' }),
+                      h('div', { children: '· 幸运彩票:10 游戏币/张,购买后全属性 +10 并立即开奖,奖金直接入钱包。' }),
+                    ] }),
+                    // 彩票奖池
+                    h('div', { className: 'miku-pet-help-block', children: [
+                      h('b', { children: '幸运彩票奖池(每张独立开奖)' }),
+                      h('table', { className: 'miku-pet-help-table', children: [
+                        h('tr', { children: [h('th', { children: '奖金(金币)' }), h('th', { children: '概率' }), h('th', { children: '期望贡献' })] }),
+                        LOTTERY_TIERS.map((t) => h('tr', { children: [
+                          h('td', { children: t.prize.toLocaleString() }),
+                          h('td', { children: t.pct + '%' }),
+                          h('td', { children: ((t.prize * t.pct) / 100).toFixed(1) + ' 金' }),
+                        ] })),
+                      ] }),
+                      h('div', { className: 'miku-pet-help-ev', children: '每张期望收益 ≈ ' + LOTTERY_EV.toFixed(1) + ' 金币' }),
+                    ] }),
                   ] }),
                 ],
               }),

@@ -15,18 +15,29 @@ the `/miku-pet` namespace (entry id `miku-pet`, host routes `/miku-pet/*`).
   next roll is guaranteed (driven by `assets/config.jsonc` weights)
 - **Drag**: the drag pose loops while held; on release it plays the
   fall-and-stand-up sequence once and returns to idle
-- **Click interaction**: a click plays a random blink / scratch reaction with a
-  speech bubble and a floating `心情 +0.25` mood feedback
+- **Click / touch interaction**: a click adds a random `心情 +0~3` mood pulse;
+  touching the head / body / legs rolls zone-specific outcomes (head 5% -> +5,
+  body 10% -> +10, legs 10% -> +30 or 90% -> -5 affection) with a dedicated
+  3-second animation and a fixed speech bubble
+- **Passive coin income**: +1 coin is earned every minute (unconditional)
 - **Work loop + wallet**: the menu's "Work" runs a continuous loop — every 10s
   one round is judged (+3 coins on success / -1 on failure) until interrupted;
   the wallet never goes below 0
-- **Shop**: the menu's "Shop" opens a centered modal; coins buy food that
-  restores hunger (small +40 / large +80)
-- **Stat bars**: hovering shows hunger / mood / energy bars (0-100); hunger
-  decays 1 per 60s (5 while working) and mood decays 0.5 per 60s; clicking
-  raises mood by 0.25
-- **Two-level hover menu + rename**: hovering shows a small menu (name +
-  rename / wallet / shop / work); the name is stored in localStorage
+- **Shop**: coins buy food that restores hunger (small +40 / large +80);
+  a game coin (游戏币) item exchanges 10 coins for 1 game coin; a lucky lottery
+  ticket costs 10 game coins, restores all stats by +10 and draws a prize
+  instantly (1,000,000/0.01%, 500,000/0.08%, 6,666/0.35%, 1,000/1.2%, 50/98.36%)
+- **Sleep**: the menu's "Sleep" loops a sleep animation (falling-asleep frames
+  once, then the resting loop), restores +4 energy every 30s and wakes on
+  click / drag
+- **Stat bars**: hovering shows hunger / mood / energy (0-100) and affection
+  (0-500) bars; hunger decays 1 per 60s (5 while working), mood 0.5, energy
+  0.25; affection decays 1 per 300s while idle and is raised by touch
+  interactions
+- **Hover menu + rename**: a light anime-styled menu (name + rename / wallets /
+  shop / work / sleep / play guide); the play guide opens a dedicated page
+  listing every rule with the lottery odds and expected value; the name is
+  stored in localStorage
 - **Free drag positioning**: dragging moves the pet anywhere and the position
   persists (localStorage), with a "back to corner" action
 - **Multi-instance + configurable**: the settings section can add pets and
