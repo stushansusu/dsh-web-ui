@@ -26,6 +26,7 @@ import type { IncomingMessage, ServerResponse } from 'node:http';
 import { join, normalize, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { resolveDshHome } from '@deepseek-ai/dsh-home-paths';
+import { isLoopbackRequest } from './loopback.ts';
 import { mountOnce } from './mount-once.ts';
 
 /** 插件行 id（与 cordis.patch.yml 一致；避开内置 dsh-pet 的 web-ui-pet） */
@@ -169,7 +170,7 @@ export function sanitizeUserConfig(raw: unknown): { pets: unknown[]; animations?
  * apply 经 mountOnce 包装：独立安装 + 聚合安装（web-ui-miku-pet 行）双源共存时,
  * 第二个实例 apply 为空操作,避免 `webserver: duplicate prefix route` 启动失败。 */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any -- DSH 注入的 ctx（webServer/locale 等 service 无静态类型）
-function applyImpl(ctx: any): void {
+export function applyImpl(ctx: any): void {
   const thumbRoot = join(PACKAGE_ROOT, 'assets', 'thumb');
   // 用户数据根：配置与用户素材统一收敛于此（扩展包按 <插件id> 各自建目录）
   const userRoot = join(resolveDshHome(), 'miku-pet');
@@ -241,6 +242,10 @@ function applyImpl(ctx: any): void {
               return;
             }
             if (req.method === 'PUT') {
+              if (!isLoopbackRequest(req)) {
+                sendJson(res, 403, { error: 'forbidden: loopback-only' });
+                return;
+              }
               try {
                 const body = await readBody(req);
                 const parsed = JSON.parse(body);
@@ -260,6 +265,10 @@ function applyImpl(ctx: any): void {
               return;
             }
             if (req.method === 'DELETE') {
+              if (!isLoopbackRequest(req)) {
+                sendJson(res, 403, { error: 'forbidden: loopback-only' });
+                return;
+              }
               try {
                 await rm(userConfigPath, { force: true });
               } catch {

@@ -54,3 +54,5 @@ standup / clicks 池、台词 phrases)。
 
 MIT。本包改编自 [PC2005-cloud/dsh-pet](https://github.com/PC2005-cloud/dsh-pet)(MIT),
 Miku 形象素材与玩法代码为本包新增。
+初音ミク(Hatsune Miku)的角色名称、形象与肖像权归 Crypton Future Media, INC. 所有;
+角色使用边界与 Piapro Character License 链接见 [NOTICE.md](NOTICE.md)。

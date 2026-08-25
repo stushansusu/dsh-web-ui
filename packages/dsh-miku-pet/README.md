@@ -71,3 +71,6 @@ categories 60, 5s dice, pity timer, drag / standup / clicks pools, phrases).
 
 MIT. Adapted from [PC2005-cloud/dsh-pet](https://github.com/PC2005-cloud/dsh-pet)
 (MIT); the Miku art and gameplay code are new additions in this package.
+The Hatsune Miku character name, image, and likeness belong to Crypton Future
+Media, INC.; the character-usage boundary and the Piapro Character License
+reference live in [NOTICE.md](NOTICE.md).

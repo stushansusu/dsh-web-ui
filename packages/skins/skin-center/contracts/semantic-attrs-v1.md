@@ -102,7 +102,7 @@ family / 插件区域：
 | `row` | session-id | 会话列表行；面板内行容器（`[data-dsh-part="row"]`） |
 | `copy` | session-id | 每行复制按钮；`button[data-dsh-part="copy"]` |
 | `search` | session-id | 面板搜索输入框；`input[type="search"][data-dsh-part="search"]` |
-| `sprite` | miku-pet | 宠物帧舞台；`[data-dsh-plugin="miku-pet"] > [data-dsh-part="sprite"]` |
+| `sprite` | miku-pet | 宠物帧舞台；`[data-dsh-plugin="miku-pet"] [data-dsh-part="sprite"]` |
 | `menu` | miku-pet | 悬停菜单（两级）；`[data-dsh-part="menu"]` |
 | `stats` | miku-pet | 左侧属性彩条；`[data-dsh-part="stats"]` |
 | `shop` | miku-pet | 商店居中窗口；`[data-dsh-part="shop"]` |

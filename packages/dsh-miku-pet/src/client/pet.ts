@@ -1110,6 +1110,7 @@ export function makePetUI(rt: {
     const menuNode = menuOpen
       ? h('div', {
           className: 'miku-pet-menu',
+          'data-dsh-part': 'menu',
           'data-miku-lit': '1',
           onPointerEnter: openMenu,
           onPointerLeave: closeMenu,
@@ -1213,6 +1214,7 @@ export function makePetUI(rt: {
         h('div', {
           ref: stageRef,
           className: 'miku-pet-stage',
+          'data-dsh-part': 'sprite',
           style: stageStyle,
           children: [
             h('img', {
@@ -1230,6 +1232,7 @@ export function makePetUI(rt: {
         menuOpen
           ? h('div', {
               className: 'miku-pet-stats',
+              'data-dsh-part': 'stats',
               'data-miku-lit': '1',
               children: STAT_DEFS.map((d) => {
                 const v = Math.round(stats[d.key]);
@@ -1245,15 +1248,16 @@ export function makePetUI(rt: {
             })
           : null,
         // 对话气泡（按动作弹台词；自动隐藏）
-        bubble ? h('div', { className: 'miku-pet-bubble', children: bubble }) : null,
+        bubble ? h('div', { className: 'miku-pet-bubble', 'data-dsh-part': 'bubble', children: bubble }) : null,
         // 互动飘字（点击等操作：头顶弹出 +0.25 心情）
-        floatMsg ? h('div', { key: floatKey, className: 'miku-pet-float', children: floatMsg }) : null,
+        floatMsg ? h('div', { key: floatKey, className: 'miku-pet-float', 'data-dsh-part': 'float', children: floatMsg }) : null,
         // 悬停菜单
         menuNode,
         // 商店独立窗口（网页中央模态；标题居中「miku商店」/ 格子物品 / 右下角钱包余额）
         shopOpen
           ? h('div', {
               className: 'miku-pet-shop-overlay',
+              'data-dsh-part': 'shop',
               onClick: () => setShopOpen(false),
               children: h('div', {
                 className: 'miku-pet-shop-window',
