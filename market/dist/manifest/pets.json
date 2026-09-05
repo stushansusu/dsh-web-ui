@@ -19,8 +19,7 @@
         "assets/pets/jyn/previews/anyejinjin-idle.webp",
         "assets/pets/jyn/previews/anyejinjin-angry.webp",
         "assets/pets/jyn/previews/lanhainishang-idle.webp",
-        "assets/pets/jyn/previews/lanhainishang-lift-skirt.webp",
-        "assets/pets/jyn/previews/害羞.webp"
+        "assets/pets/jyn/previews/lanhainishang-lift-skirt.webp"
       ],
       "tracks": [
         "idle",
@@ -52,7 +51,6 @@
         "previews/work-fail.webp",
         "previews/work-success.webp",
         "previews/work.webp",
-        "previews/害羞.webp",
         "thumb/anyejinjin-angry/jyn-anyejinjin-angry-10_40.webp",
         "thumb/anyejinjin-angry/jyn-anyejinjin-angry-11_40.webp",
         "thumb/anyejinjin-angry/jyn-anyejinjin-angry-12_40.webp",
