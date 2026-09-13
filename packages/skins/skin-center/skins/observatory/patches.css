@@ -122,13 +122,13 @@ body [data-pane='details'] {
   background-color: #0a0c12db !important;
 }
 
-/* ── hero: the empty-session screen ──────────────────────────────────────── */
+/* ── hero: the empty-session screen ──
+   原来这里还有两层 repeating-radial-gradient（21px/26px 的同心细圈），
+   在主页上读起来就是一只钟面，已移除。只留一层柔和顶光。 */
 
 [data-phase='hero'] {
   position: relative;
   background-image:
-    repeating-radial-gradient(circle at 50% 42%, transparent 0 21px, #9c803821 21px 22px),
-    repeating-radial-gradient(circle at 50% 42%, transparent 0 26px, #9c803812 26px 26.6px),
     radial-gradient(46% 38% at 50% 40%, #1b1d2612 0%, transparent 70%),
     radial-gradient(72% 56% at 50% 0%, #d9c7956b 0%, transparent 72%);
   background-repeat: no-repeat;
@@ -137,8 +137,6 @@ body [data-pane='details'] {
 
 body [data-phase='hero'] {
   background-image:
-    repeating-radial-gradient(circle at 50% 42%, transparent 0 21px, #c2a55a1c 21px 22px),
-    repeating-radial-gradient(circle at 50% 42%, transparent 0 26px, #c2a55a0f 26px 26.6px),
     radial-gradient(46% 38% at 50% 40%, #06080c80 0%, transparent 70%),
     radial-gradient(72% 56% at 50% 0%, #8e7a3e24 0%, transparent 72%);
 }
@@ -501,24 +499,9 @@ body [data-slot='sidebar.workspaces'] [role='treeitem']:has([role='group']) {
   background-image: url(assets/ws-sleeve-dark.svg);
 }
 
-/* ── 6. 首屏：观测环。挂在 hero 的伪元素上（引擎已把 hero 设成 relative），
-   这样不和引擎已经写好的 hero 渐变抢 background-image。 ── */
-[data-phase='hero']::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background-image: url(assets/hero-reticle-light.svg);
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0.9;
-}
-body [data-phase='hero']::before {
-  background-image: url(assets/hero-reticle-dark.svg);
-  opacity: 1;
-}
+/* ── 6. 首屏观测环已移除 ──
+   那一圈带 120 根刻度与十字丝的观测环读起来就是一只钟面，在主页上太抢。
+   首屏现在只有引擎给的那层柔和同心圈（见上方的 [data-phase='hero']）。 */
 
 /* ══ 补齐还没设计过的面 ══════════════════════════════════════════════════
    到这一步，观测室的语言（圆、弧、刻度、铆钉、黄铜线）已经有了，但还有五个面是
