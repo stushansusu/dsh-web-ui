@@ -961,6 +961,35 @@ window.SKIN_MANIFEST = {
           }
         }
       }
+    },
+    {
+      "id": "hairline",
+      "name": "素线",
+      "nameEn": "Hairline",
+      "author": "stushansusu",
+      "tagline": "墨线 · 磨砂玻璃 · 深潭循环视频 · 暗色专用",
+      "description": "极简线条 + 磨砂玻璃，**暗色专用**：界面是被画出来的，不是被填出来的 —— 1px 墨线（在深底上它是亮的）、主操作那一块实心，其余全是线。侧栏、右栏、输入卡、顶栏与会话列都是挂在空的伪元素上的毛玻璃，背后是一段水面循环视频的深潭 grade。工作区按图纸的语汇排成一张索引表：工作区是「图签」（3px 墨线起头 + 等宽名号），会话挂在一条竖轨上，右侧的时间落在一道细线上。首屏不画任何东西 —— 画面交给视频。明暗两个模式渲染同一套暗色，系统切浅色也不会翻白。（本皮肤按设计就是暗色专用：明暗两个模式渲染同一套暗色，系统切浅色也不会翻白。）",
+      "accent": "#6fd3b0",
+      "preview": {
+        "light": "assets/skins/hairline/preview/light.jpg",
+        "dark": "assets/skins/hairline/preview/dark.jpg"
+      },
+      "contributes": {
+        "stylesheet": "skin.css",
+        "patches": "patches.css",
+        "backgroundMedia": {
+          "light": {
+            "type": "video",
+            "src": "assets/skins/hairline/assets/water-line-dark.mp4",
+            "scrim": "linear-gradient(180deg, rgba(5,14,11,0.46) 0%, rgba(5,14,11,0.20) 26%, rgba(5,14,11,0.10) 58%, rgba(5,14,11,0.44) 100%)"
+          },
+          "dark": {
+            "type": "video",
+            "src": "assets/skins/hairline/assets/water-line-dark.mp4",
+            "scrim": "linear-gradient(180deg, rgba(5,14,11,0.46) 0%, rgba(5,14,11,0.20) 26%, rgba(5,14,11,0.10) 58%, rgba(5,14,11,0.44) 100%)"
+          }
+        }
+      }
     }
   ]
 }
