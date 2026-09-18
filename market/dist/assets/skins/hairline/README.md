@@ -16,9 +16,15 @@ video.
   `body[data-ds-dark-theme]`, every L3 rule drops its light/dark branch, and
   `color-scheme: dark` is pinned so native widgets follow. The market renderer
   injects the skin without running the loader's `:root` → `body` token clone,
-  so the palette is declared on `body` as well. Measured: the light and dark
-  renderings are identical to the pixel (0 % of pixels differ, max channel
-  delta 0).
+  so the palette is declared on `body` as well.
+- **Measured under both host themes, not asserted.** The two committed previews
+  are captures of the market simulator under a **light host**
+  (`preview.html?skin=hairline&theme=light`, i.e. `body[data-ds-dark-theme]`
+  absent) and a dark host, at 1440×900. Isolating the moving backdrop — the
+  `<video>` hidden, the scrim kept — the two host themes render **0 differing
+  pixels** (max channel delta 0 over 1,296,000 px). The shipped pair still
+  differs as files only because the backdrop is a running loop and the two
+  captures land on different water frames.
 - **Three module-CSS light branches are pinned**: `Deliverables`, `JsonTree`
   and `GuideBody` branch on `body[data-ds-dark-theme]` and read
   `--dsw-static-*` instead of tokens, so a light scheme paints them with stock
@@ -64,5 +70,9 @@ blurred, not because they are opaque.
 
 ## Preview
 
-`preview/light.jpg` and `preview/dark.jpg` are the same render — the skin is
-dark-only by design.
+`preview/light.jpg` is a render under a **light host system** and
+`preview/dark.jpg` under a dark one — two independent captures of the market
+simulator at 1440×900, not one file copied twice. They look the same because the
+skin is dark-only by design; the pixel measurement above is what backs that
+claim. The backdrop is a running video loop, so the two captures sit on
+different frames of the water.
