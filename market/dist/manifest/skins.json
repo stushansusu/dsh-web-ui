@@ -2290,6 +2290,8 @@
         "dark": "assets/skins/hairline/preview/dark.jpg"
       },
       "files": [
+        "LICENSE",
+        "NOTICE",
         "README.md",
         "README.zh.md",
         "assets/water-line-dark.mp4",

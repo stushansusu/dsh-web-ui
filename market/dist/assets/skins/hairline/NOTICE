@@ -1,0 +1,35 @@
+NOTICE
+======
+
+hairline skin — asset provenance.
+
+Backdrop video (third-party, sourced from the internet)
+------------------------------------------------------
+
+- File: assets/water-line-dark.mp4
+- Title: 卡通-水面-治愈 (a cartoon water-surface ambient loop)
+- Author / copyright holder: not identified. The file carries no author
+  metadata and no rights holder is published for it.
+- Source: the internet — a wallpaper distributed by the 哲风壁纸 wallpaper app,
+  saved by the contributor as `【哲风壁纸】卡通-水面-治愈.mp4` and re-graded for
+  this skin.
+- Basis for inclusion: the contributor represents that this wallpaper is freely
+  distributed on the internet and that no permission is required to include it.
+  That representation is the contributor's own; no licence document exists for
+  this file and no rights holder has been identified who could grant one.
+  It is recorded here rather than presented as a licence.
+- If a rights holder objects to this inclusion, the file will be removed from
+  this skin on request.
+- Changes made: trimmed to 190 frames, 1920x1080, 30fps; the tail 0.7 s was
+  cross-faded into the head so the loop closes on two consecutive frames of the
+  source; colour-graded; re-encoded H.264 / yuv420p.
+
+Skin code and stylesheets
+-------------------------
+
+skin.json, skin.css, patches.css, the READMEs and this notice are original work
+of the skin's author and are released under the CC0 1.0 dedication in the
+LICENSE file of this directory.
+
+**That dedication covers the skin's own work only.** It does not cover
+`assets/water-line-dark.mp4`, whose status is recorded above.

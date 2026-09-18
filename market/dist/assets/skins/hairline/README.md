@@ -61,6 +61,12 @@ its first 0.7 s, so the wrap point is two consecutive frames of the original
 deliberately thin — the panels are readable because the backdrop behind them is
 blurred, not because they are opaque.
 
+The footage is **third-party, sourced from the internet**, and it is the one file
+here that is not the author's own work. `NOTICE` records what is known about it
+(source, unidentified rights holder) and the basis on which it is included;
+`LICENSE` (CC0 1.0) covers the skin's own code and stylesheets only, not the
+video.
+
 ## Palette
 
 - Ground: deep pool `#071310`
